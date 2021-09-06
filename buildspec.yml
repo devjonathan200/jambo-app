@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      # install node
+      - curl -fsSL https://deb.nodesource.com/setup_12.x | bash -
+      - apt install -y nodejs
+      # install expo cli
+  pre_build:
+    commands:
+      - install dependencies...
+      - npm install -g expo-cli
+      - npm install
+  build:
+    commands:
+      - stating the build...
+      - expo build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - target/messageUtil-1.0.jar
