@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
-      -echo install node in the system...
+      - echo install node in the system...
       - curl -fsSL https://deb.nodesource.com/setup_12.x | bash -
       - apt install -y nodejs
   pre_build:
