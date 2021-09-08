@@ -3,20 +3,23 @@ version: 0.2
 phases:
   install:
     commands:
-      # install node
+      -echo install node in the system...
       - curl -fsSL https://deb.nodesource.com/setup_12.x | bash -
       - apt install -y nodejs
-      # install expo cli
   pre_build:
     commands:
-      - install dependencies...
+      - echo install dependencies...
+      - echo installing expo cli globally...
       - npm install save-dev expo-cli -g
+      - echo exporting the expo credentials...
       - export EXPO_CLI_PASSWORD=$(aws ssm get-parameter --name "expo-cli-password" --region <my-aws-region> --query 'Parameter.Value' --output text)
       - npx expo login --non-interactive -u ${EXPO_USERNAME}
+      - echo installing node dependencies in the project
       - npm install
+      - expo install
   build:
     commands:
-      - stating the build...
+      - echo stating the build...
       - npx expo publish --non-interactive --release-channel dev-${CODEBUILD_BUILD_NUMBER}
       - 
   post_build:
