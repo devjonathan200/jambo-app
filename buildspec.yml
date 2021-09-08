@@ -10,15 +10,16 @@ phases:
   pre_build:
     commands:
       - install dependencies...
-      - npm install -g expo-cli
+      - npm install save-dev expo-cli -g
+      - export EXPO_CLI_PASSWORD=$(aws ssm get-parameter --name "expo-cli-password" --region <my-aws-region> --query 'Parameter.Value' --output text)
+      - npx expo login --non-interactive -u ${EXPO_USERNAME}
       - npm install
   build:
     commands:
       - stating the build...
-      - expo build
+      - npx expo publish --non-interactive --release-channel dev-${CODEBUILD_BUILD_NUMBER}
+      - 
   post_build:
     commands:
-      - echo Build completed on `date`
-artifacts:
-  files:
-    - target/messageUtil-1.0.jar
+      - echo "publishing to expo default channel"
+      - npx expo publish --non-interactive

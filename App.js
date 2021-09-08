@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 // import { Font } from "expo"
 import { useFonts } from '@use-expo/font';
 import AppLoading from 'expo-app-loading';
+import { NativeBaseProvider, Box } from 'native-base';
 // custom imports
 import Launch from './src/Components/screens/Launch';
 // import Home from './src/Components/screens/Home';
@@ -32,14 +33,17 @@ const App = () => {
   }
   
   return (
-    <NavigationContainer>
-        <Stack.Navigator initialRouteName="launch">
-        <Stack.Screen options={{ headerShown: false }} name="launch" component={Launch} />
-        <Stack.Screen options={{ headerShown: false }} name="home" component={HomeScreen} />
-        <Stack.Screen options={{headerShown: false}} name="Playground" component={Playground} />
-        <Stack.Screen options={{headerShown: false}} name="category" component={CategoriesScreen} />
-    </Stack.Navigator>
-    </NavigationContainer>
+    <NativeBaseProvider>
+      <NavigationContainer>
+          <Stack.Navigator initialRouteName="launch">
+            <Stack.Screen options={{ headerShown: false }} name="launch" component={Launch} />
+            <Stack.Screen options={{ headerShown: false }} name="home" component={HomeScreen} />
+            <Stack.Screen options={{headerShown: false}} name="Playground" component={Playground} />
+            <Stack.Screen options={{headerShown: false}} name="category" component={CategoriesScreen} />
+          </Stack.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
+
   );
 }
 
